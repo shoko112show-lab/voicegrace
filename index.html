@@ -600,9 +600,109 @@ footer { background:var(--dark); color:rgba(255,252,249,.7); padding:56px 32px 3
         </div>
       </div>
       <div class="date-row">
-        <div class="form-field"><label>希望日<span class="req">*</span></label><input type="date" id="bDate" min=""></div>
-        <div class="form-field"><label>希望時間<span class="req">*</span></label>
-          <select id="bTime"><option value="">選択してください</option><option>10:00</option><option>11:00</option><option>13:00</option><option>14:00</option><option>15:00</option><option>16:00</option><option>19:00</option><option>20:00</option></select>
+        <div class="form-field">
+          <label>希望日<span class="req">*</span></label>
+          <select id="bDate" onchange="updateTimeSlots()">
+            <option value="">選択してください</option>
+            <option value="4月6日（日）">4月6日（日）</option>
+            <option value="4月7日（月）">4月7日（月）</option>
+            <option value="4月8日（火）">4月8日（火）</option>
+            <option value="4月9日（水）">4月9日（水）</option>
+            <option value="4月10日（木）">4月10日（木）</option>
+            <option value="4月13日（日）">4月13日（日）</option>
+            <option value="4月14日（月）">4月14日（月）</option>
+            <option value="4月15日（火）">4月15日（火）</option>
+            <option value="4月16日（水）">4月16日（水）</option>
+            <option value="4月17日（木）">4月17日（木）</option>
+            <option value="4月20日（日）">4月20日（日）</option>
+            <option value="4月21日（月）">4月21日（月）</option>
+            <option value="4月22日（火）">4月22日（火）</option>
+            <option value="4月23日（水）">4月23日（水）</option>
+            <option value="4月27日（日）">4月27日（日）</option>
+            <option value="4月28日（月）">4月28日（月）</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>希望時間<span class="req">*</span></label>
+          <select id="bTime">
+            <option value="">まず日付を選んでください</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label>レッスン形式<span class="req">*</span></label>
+        <select id="bFormat">
+          <option value="">選択してください</option>
+          <option value="オンライン（Zoom）">オンライン（Zoom）</option>
+          <option value="対面（川崎）">対面（川崎）※近郊の方のみ</option>
+        </select>
+      </div>
+
+      <div style="background:var(--peach-pale); border-radius:12px; padding:16px 18px; margin-bottom:18px; font-size:12px; color:var(--mid);">
+        📅 <strong>第2・第3希望日時</strong>（任意）<br>
+        <span style="font-size:11px;">第1希望が埋まっていた場合に備えてご記入ください</span>
+      </div>
+
+      <div class="date-row">
+        <div class="form-field">
+          <label>第2希望日</label>
+          <select id="bDate2" onchange="updateTimeSlots2()">
+            <option value="">選択してください</option>
+            <option value="4月6日（日）">4月6日（日）</option>
+            <option value="4月7日（月）">4月7日（月）</option>
+            <option value="4月8日（火）">4月8日（火）</option>
+            <option value="4月9日（水）">4月9日（水）</option>
+            <option value="4月10日（木）">4月10日（木）</option>
+            <option value="4月13日（日）">4月13日（日）</option>
+            <option value="4月14日（月）">4月14日（月）</option>
+            <option value="4月15日（火）">4月15日（火）</option>
+            <option value="4月16日（水）">4月16日（水）</option>
+            <option value="4月17日（木）">4月17日（木）</option>
+            <option value="4月20日（日）">4月20日（日）</option>
+            <option value="4月21日（月）">4月21日（月）</option>
+            <option value="4月22日（火）">4月22日（火）</option>
+            <option value="4月23日（水）">4月23日（水）</option>
+            <option value="4月27日（日）">4月27日（日）</option>
+            <option value="4月28日（月）">4月28日（月）</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>第2希望時間</label>
+          <select id="bTime2">
+            <option value="">まず日付を選んでください</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="date-row">
+        <div class="form-field">
+          <label>第3希望日</label>
+          <select id="bDate3" onchange="updateTimeSlots3()">
+            <option value="">選択してください</option>
+            <option value="4月6日（日）">4月6日（日）</option>
+            <option value="4月7日（月）">4月7日（月）</option>
+            <option value="4月8日（火）">4月8日（火）</option>
+            <option value="4月9日（水）">4月9日（水）</option>
+            <option value="4月10日（木）">4月10日（木）</option>
+            <option value="4月13日（日）">4月13日（日）</option>
+            <option value="4月14日（月）">4月14日（月）</option>
+            <option value="4月15日（火）">4月15日（火）</option>
+            <option value="4月16日（水）">4月16日（水）</option>
+            <option value="4月17日（木）">4月17日（木）</option>
+            <option value="4月20日（日）">4月20日（日）</option>
+            <option value="4月21日（月）">4月21日（月）</option>
+            <option value="4月22日（火）">4月22日（火）</option>
+            <option value="4月23日（水）">4月23日（水）</option>
+            <option value="4月27日（日）">4月27日（日）</option>
+            <option value="4月28日（月）">4月28日（月）</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>第3希望時間</label>
+          <select id="bTime3">
+            <option value="">まず日付を選んでください</option>
+          </select>
         </div>
       </div>
       <div class="form-field"><label>お名前<span class="req">*</span></label><input type="text" id="bName" placeholder="山田 花子"></div>
@@ -640,9 +740,72 @@ footer { background:var(--dark); color:rgba(255,252,249,.7); padding:56px 32px 3
 </footer>
 
 <script>
-const today = new Date().toISOString().split("T")[0];
-const bDate = document.getElementById("bDate");
-if(bDate) bDate.min = today;
+const slots = {
+  "4月6日（日）": ["11:00", "12:00"],
+  "4月7日（月）": ["10:00", "11:00", "12:00", "14:00"],
+  "4月8日（火）": ["10:30"],
+  "4月9日（水）": ["09:30", "10:30", "11:30", "12:30", "13:30", "14:30"],
+  "4月10日（木）": ["09:30", "10:30", "11:30", "15:00"],
+  "4月13日（日）": ["09:30", "10:30", "11:30", "12:30", "13:30"],
+  "4月14日（月）": ["09:30", "10:30", "15:00", "16:00"],
+  "4月15日（火）": ["11:30", "12:30", "13:30"],
+  "4月16日（水）": ["10:30", "11:30", "12:30", "13:30", "14:30"],
+  "4月17日（木）": ["09:30", "10:30", "11:30", "12:30", "13:30", "14:30"],
+  "4月20日（日）": ["09:30", "10:30", "11:30", "12:30", "13:30", "14:30", "15:30"],
+  "4月21日（月）": ["12:00", "13:00", "14:00"],
+  "4月22日（火）": ["10:30", "11:30", "12:30", "13:30"],
+  "4月23日（水）": ["09:30", "10:30", "11:30", "12:30", "13:30", "14:30"],
+  "4月27日（日）": ["09:30", "10:30", "12:30", "13:30"],
+  "4月28日（月）": ["09:30", "10:30", "11:30", "12:30", "13:30", "14:30"],
+};
+
+function updateTimeSlots() {
+  const date = document.getElementById("bDate").value;
+  const timeSelect = document.getElementById("bTime");
+  timeSelect.innerHTML = "";
+  if (!date || !slots[date]) {
+    timeSelect.innerHTML = '<option value="">まず日付を選んでください</option>';
+    return;
+  }
+  timeSelect.innerHTML = '<option value="">時間を選んでください</option>';
+  slots[date].forEach(t => {
+    const opt = document.createElement("option");
+    opt.value = t; opt.textContent = t;
+    timeSelect.appendChild(opt);
+  });
+}
+
+function updateTimeSlots2() {
+  const date = document.getElementById("bDate2").value;
+  const timeSelect = document.getElementById("bTime2");
+  timeSelect.innerHTML = "";
+  if (!date || !slots[date]) {
+    timeSelect.innerHTML = '<option value="">まず日付を選んでください</option>';
+    return;
+  }
+  timeSelect.innerHTML = '<option value="">時間を選んでください</option>';
+  slots[date].forEach(t => {
+    const opt = document.createElement("option");
+    opt.value = t; opt.textContent = t;
+    timeSelect.appendChild(opt);
+  });
+}
+
+function updateTimeSlots3() {
+  const date = document.getElementById("bDate3").value;
+  const timeSelect = document.getElementById("bTime3");
+  timeSelect.innerHTML = "";
+  if (!date || !slots[date]) {
+    timeSelect.innerHTML = '<option value="">まず日付を選んでください</option>';
+    return;
+  }
+  timeSelect.innerHTML = '<option value="">時間を選んでください</option>';
+  slots[date].forEach(t => {
+    const opt = document.createElement("option");
+    opt.value = t; opt.textContent = t;
+    timeSelect.appendChild(opt);
+  });
+}
 
 function toggleMenu(){
   const l = document.querySelector(".nav-links");
@@ -664,7 +827,7 @@ async function submitForm(){
   const time=document.getElementById("bTime").value;
   const lt=document.querySelector("input[name=lt]:checked")?.value||"";
   const note=document.getElementById("bNote").value;
-  if(!name||!email||!date||!time){ alert("お名前、メールアドレス、希望日、希望時間は必須です。"); return;  }
+  const fmt2check = document.getElementById("bFormat").value; if(!name||!email||!date||!time||!fmt2check){ alert("お名前、メールアドレス、希望日、希望時間、レッスン形式は必須です。"); return; }
 
   const btn = document.querySelector(".form-submit");
   btn.textContent = "送信中...";
@@ -674,7 +837,14 @@ async function submitForm(){
     const res = await fetch("https://formspree.io/f/xykbdqvk", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, lessonType: lt, date, time, message: note })
+      body: JSON.stringify({
+        name, email, lessonType: lt,
+        format: document.getElementById("bFormat").value,
+        "第1希望": date + " " + time,
+        "第2希望": document.getElementById("bDate2").value + " " + document.getElementById("bTime2").value,
+        "第3希望": document.getElementById("bDate3").value + " " + document.getElementById("bTime3").value,
+        message: note
+      })
     });
 
     if (res.ok) {
