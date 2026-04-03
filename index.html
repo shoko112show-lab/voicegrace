@@ -657,23 +657,47 @@ function toggleFaq(btn){
   btn.closest(".faq-item").classList.toggle("open");
 }
 
-function submitForm(){
+async function submitForm(){
   const name=document.getElementById("bName").value.trim();
   const email=document.getElementById("bEmail").value.trim();
   const date=document.getElementById("bDate").value;
   const time=document.getElementById("bTime").value;
   const lt=document.querySelector("input[name=lt]:checked")?.value||"";
-  if(!name||!email||!date||!time){ alert("お名前、メールアドレス、希望日、希望時間は必須です。"); return; }
-  const fmt=new Date(date+"T00:00:00").toLocaleDateString("ja-JP",{year:"numeric",month:"long",day:"numeric",weekday:"short"});
-  document.getElementById("bConfirmBox").innerHTML=`
-    <div class="confirm-row"><span class="ck">お名前</span><span class="cv">${name}</span></div>
-    <div class="confirm-row"><span class="ck">レッスン</span><span class="cv">${lt}</span></div>
-    <div class="confirm-row"><span class="ck">日時</span><span class="cv">${fmt} ${time}</span></div>
-    <div class="confirm-row"><span class="ck">メール</span><span class="cv">${email}</span></div>
-  `;
-  document.getElementById("bForm").style.display="none";
-  document.getElementById("bSuccess").style.display="block";
-  window.scrollTo({top:document.getElementById("booking").offsetTop-80,behavior:"smooth"});
+  const note=document.getElementById("bNote").value;
+  if(!name||!email||!date||!time){ alert("お名前、メールアドレス、希望日、希望時間は必須です。"); return;  }
+
+  const btn = document.querySelector(".form-submit");
+  btn.textContent = "送信中...";
+  btn.disabled = true;
+
+  try {
+    const res = await fetch("https://formspree.io/f/xykbdqvk", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, lessonType: lt, date, time, message: note })
+    });
+
+    if (res.ok) {
+      const fmt=new Date(date+"T00:00:00").toLocaleDateString("ja-JP",{year:"numeric",month:"long",day:"numeric",weekday:"short"});
+      document.getElementById("bConfirmBox").innerHTML=`
+        <div class="confirm-row"><span class="ck">お名前</span><span class="cv">${name}</span></div>
+        <div class="confirm-row"><span class="ck">レッスン</span><span class="cv">${lt}</span></div>
+        <div class="confirm-row"><span class="ck">日時</span><span class="cv">${fmt} ${time}</span></div>
+        <div class="confirm-row"><span class="ck">メール</span><span class="cv">${email}</span></div>
+      `;
+      document.getElementById("bForm").style.display="none";
+      document.getElementById("bSuccess").style.display="block";
+      window.scrollTo({top:document.getElementById("booking").offsetTop-80,behavior:"smooth"});
+    } else {
+      alert("送信に失敗しました。お手数ですがLINEよりお問い合わせください。");
+      btn.textContent = "予約リクエストを送る 🌸";
+      btn.disabled = false;
+    }
+  } catch(e) {
+    alert("送信に失敗しました。お手数ですがLINEよりお問い合わせください。");
+    btn.textContent = "予約リクエストを送る 🌸";
+    btn.disabled = false;
+  }
 }
 
 function resetBooking(){
