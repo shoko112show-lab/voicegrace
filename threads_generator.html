@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Threads投稿ジェネレーター | VoiceGrace</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Zen+Kaku+Gothic+New:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1410;
+    --paper: #faf7f2;
+    --cream: #f0ebe1;
+    --gold: #c9a84c;
+    --gold-light: #e8d5a3;
+    --rose: #c97b7b;
+    --sage: #7b9e87;
+    --border: #d4c9b8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
+
+  .bg-texture {
+    position: fixed;
+    inset: 0;
+    background-image: 
+      radial-gradient(ellipse at 20% 20%, rgba(201,168,76,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(201,123,123,0.06) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 760px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo-mark {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+    color: #888;
+    letter-spacing: 0.05em;
+  }
+
+  .input-section {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 32px;
+    margin-bottom: 32px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+
+  .input-label {
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .input-row {
+    display: flex;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  textarea {
+    flex: 1;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 14px 16px;
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 15px;
+    color: var(--ink);
+    background: var(--paper);
+    resize: none;
+    height: 56px;
+    line-height: 1.6;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+
+  textarea:focus {
+    border-color: var(--gold);
+  }
+
+  textarea::placeholder { color: #bbb; }
+
+  .generate-btn {
+    background: var(--ink);
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 0 28px;
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    white-space: nowrap;
+    min-width: 120px;
+  }
+
+  .generate-btn:hover { background: #333; }
+  .generate-btn:active { transform: scale(0.98); }
+  .generate-btn:disabled { background: #ccc; cursor: not-allowed; }
+
+  .tone-options {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+
+  .tone-chip {
+    font-size: 11px;
+    padding: 5px 12px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    cursor: pointer;
+    color: #888;
+    transition: all 0.15s;
+    background: white;
+    letter-spacing: 0.05em;
+  }
+
+  .tone-chip.active {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: white;
+    font-weight: 700;
+  }
+
+  .tone-label {
+    font-size: 11px;
+    color: #bbb;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .loading {
+    text-align: center;
+    padding: 60px;
+    display: none;
+  }
+
+  .loading-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: pulse 1.4s ease-in-out infinite;
+  }
+
+  .dot:nth-child(2) { animation-delay: 0.2s; }
+  .dot:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes pulse {
+    0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+    40% { transform: scale(1); opacity: 1; }
+  }
+
+  .loading-text {
+    font-size: 13px;
+    color: #999;
+    letter-spacing: 0.1em;
+  }
+
+  .results {
+    display: none;
+  }
+
+  .results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .results-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 14px;
+    color: #888;
+    letter-spacing: 0.1em;
+  }
+
+  .copy-all-btn {
+    font-size: 11px;
+    padding: 6px 14px;
+    border: 1px solid var(--border);
+    background: white;
+    border-radius: 3px;
+    cursor: pointer;
+    color: #888;
+    letter-spacing: 0.05em;
+    transition: all 0.15s;
+  }
+
+  .copy-all-btn:hover {
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+
+  .post-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.03);
+    animation: fadeIn 0.3s ease forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px;
+    background: var(--cream);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .card-type {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  .card-num {
+    font-size: 10px;
+    color: #bbb;
+    letter-spacing: 0.05em;
+  }
+
+  .card-body {
+    padding: 20px;
+    font-size: 14px;
+    line-height: 1.9;
+    color: var(--ink);
+    white-space: pre-wrap;
+  }
+
+  .card-footer {
+    padding: 10px 16px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+
+  .copy-btn {
+    font-size: 11px;
+    padding: 5px 14px;
+    border: 1px solid var(--border);
+    background: white;
+    border-radius: 3px;
+    cursor: pointer;
+    color: #888;
+    letter-spacing: 0.05em;
+    transition: all 0.15s;
+  }
+
+  .copy-btn:hover {
+    background: var(--ink);
+    color: white;
+    border-color: var(--ink);
+  }
+
+  .copy-btn.copied {
+    background: var(--sage);
+    color: white;
+    border-color: var(--sage);
+  }
+
+  .char-count {
+    font-size: 11px;
+    color: #ccc;
+    align-self: center;
+  }
+
+  .error {
+    background: #fff5f5;
+    border: 1px solid #fcc;
+    border-radius: 4px;
+    padding: 20px;
+    text-align: center;
+    color: var(--rose);
+    font-size: 13px;
+    display: none;
+  }
+
+  @media (max-width: 500px) {
+    .input-row { flex-direction: column; }
+    .generate-btn { height: 48px; }
+  }
+</style>
+</head>
+<body>
+<div class="bg-texture"></div>
+<div class="container">
+
+  <header>
+    <div class="logo-mark">VoiceGrace × Threads</div>
+    <h1>投稿ジェネレーター</h1>
+    <p class="subtitle">テーマを入れるだけで、10本の投稿案が届く</p>
+  </header>
+
+  <div class="input-section">
+    <label class="input-label">テーマ</label>
+    <div class="input-row">
+      <textarea id="theme" placeholder="例：声の使い方、子役オーディションの準備、ミュージカルの魅力…" rows="1"></textarea>
+      <button class="generate-btn" id="generateBtn" onclick="generate()">生成する</button>
+    </div>
+
+    <div style="margin-top: 20px;">
+      <span class="tone-label">ターゲット</span>
+      <div class="tone-options">
+        <div class="tone-chip active" data-tone="子役を目指してる子の親">子役ママ・パパ</div>
+        <div class="tone-chip" data-tone="ミュージカルが好きな大人">ミュージカルファン</div>
+        <div class="tone-chip" data-tone="歌を上手くなりたい大人">大人の歌い手</div>
+        <div class="tone-chip" data-tone="声や話し方を改善したいビジネスパーソン">ビジネス系</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="loading" id="loading">
+    <div class="loading-dots">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+    <p class="loading-text">投稿を考えています…</p>
+  </div>
+
+  <div class="error" id="error">
+    エラーが発生しました。もう一度お試しください。
+  </div>
+
+  <div class="results" id="results">
+    <div class="results-header">
+      <span class="results-title" id="resultsTitle"></span>
+      <button class="copy-all-btn" onclick="copyAll()">全文コピー</button>
+    </div>
+    <div id="postList"></div>
+  </div>
+
+</div>
+
+<script>
+let selectedTone = '子役を目指してる子の親';
+let lastPosts = [];
+
+document.querySelectorAll('.tone-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('.tone-chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    selectedTone = chip.dataset.tone;
+  });
+});
+
+document.getElementById('theme').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    generate();
+  }
+});
+
+async function generate() {
+  const theme = document.getElementById('theme').value.trim();
+  if (!theme) return;
+
+  const btn = document.getElementById('generateBtn');
+  btn.disabled = true;
+  document.getElementById('loading').style.display = 'block';
+  document.getElementById('results').style.display = 'none';
+  document.getElementById('error').style.display = 'none';
+
+  const prompt = `あなたはミュージカル声楽講師・VoiceGrace主宰の酒井翔子です。
+Threadsの投稿文を10本書いてください。
+
+【テーマ】${theme}
+【ターゲット】${selectedTone}
+【翔子さんのキャラクター】元子役・現役ミュージカル俳優・VP認定ボイストレーナー・2児の母・等身大でリアル・押しつけがましくない・ミュージカル愛が深い
+
+【投稿のルール】
+- 1投稿は100〜200文字程度
+- 絵文字は控えめに（1〜2個まで）
+- ハッシュタグなし
+- それぞれ違うトーン・切り口にする（共感系・驚き系・豆知識系・体験談系・問いかけ系など）
+- 翔子さん本人が書いたような自然な口語調
+
+必ずJSON形式のみで返してください。マークダウンや説明文は一切不要です。
+{
+  "posts": [
+    {"type": "共感系", "text": "投稿本文"},
+    ...
+  ]
+}`;
+
+  try {
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 4000,
+        messages: [{ role: "user", content: prompt }]
+      })
+    });
+
+    const data = await response.json();
+    const text = data.content.map(i => i.text || "").join("");
+    const clean = text.replace(/```json|```/g, "").trim();
+    const parsed = JSON.parse(clean);
+
+    lastPosts = parsed.posts;
+    renderPosts(parsed.posts, theme);
+
+  } catch (err) {
+    document.getElementById('error').style.display = 'block';
+    console.error(err);
+  } finally {
+    btn.disabled = false;
+    document.getElementById('loading').style.display = 'none';
+  }
+}
+
+function renderPosts(posts, theme) {
+  const list = document.getElementById('postList');
+  list.innerHTML = '';
+  document.getElementById('resultsTitle').textContent = `「${theme}」— ${posts.length}本の投稿案`;
+  document.getElementById('results').style.display = 'block';
+
+  posts.forEach((post, i) => {
+    const card = document.createElement('div');
+    card.className = 'post-card';
+    card.style.animationDelay = `${i * 0.05}s`;
+
+    const charCount = post.text.length;
+
+    card.innerHTML = `
+      <div class="card-header">
+        <span class="card-type">${post.type || '投稿'}</span>
+        <span class="card-num">No.${i + 1}</span>
+      </div>
+      <div class="card-body">${escHtml(post.text)}</div>
+      <div class="card-footer">
+        <span class="char-count">${charCount}文字</span>
+        <button class="copy-btn" onclick="copyPost(this, ${i})">コピー</button>
+      </div>
+    `;
+    list.appendChild(card);
+  });
+}
+
+function copyPost(btn, index) {
+  navigator.clipboard.writeText(lastPosts[index].text).then(() => {
+    btn.textContent = 'コピーしました';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'コピー';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+
+function copyAll() {
+  const all = lastPosts.map((p, i) => `【${i+1}】${p.type}\n${p.text}`).join('\n\n---\n\n');
+  navigator.clipboard.writeText(all).then(() => {
+    const btn = document.querySelector('.copy-all-btn');
+    btn.textContent = 'コピーしました！';
+    setTimeout(() => btn.textContent = '全文コピー', 2000);
+  });
+}
+
+function escHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+</script>
+</body>
+</html>
