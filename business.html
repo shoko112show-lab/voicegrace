@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>企業・団体向け研修 | VoiceGrace 酒井翔子</title>
+<meta name="description" content="営業・接客の話し方研修、管理職プレゼン指導、講師のボイスケア。元ミュージカル俳優×音声学。">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,700;1,400&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html" style="text-decoration:none;">VoiceGrace<span>ボイストレーニング・ミュージカル</span></a>
+  <ul class="nav-links"><li><a href="index.html">ホーム</a></li><li><a href="kids.html">子ども・保護者の方</a></li><li><a href="adults.html">大人の方</a></li><li><a href="business.html" class=current>企業・団体の方</a></li><li><a href="https://line.me/R/ti/p/@036bejox" target="_blank" class="nav-cta" style="background:#06C755;">LINEで相談</a></li></ul>
+  <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</nav>
+<section class="page-head">
+  <div class="section-inner">
+    <div class="section-label">For Business</div>
+    <h1 class="section-title">企業・団体向け<em>研修</em></h1>
+    <p class="section-sub">舞台で培った「届く声・伝わる話し方」を、仕事の現場へ。音声学に基づくので、感覚論ではなく再現できる形でお伝えします。</p>
+  </div>
+</section>
+<section id="business" class="soft">
+  <div class="biz-wrap">
+    <div class="biz-grid">
+      <div>
+        <ul class="biz-list">
+          <li>営業・接客スタッフ向け「伝わる話し方」研修<small>声の通り・滑舌・第一印象。半日〜1日、少人数〜30名程度</small></li>
+          <li>経営者・管理職向け プレゼン／スピーチ指導<small>個別または少人数。本番前の集中サポートも</small></li>
+          <li>講師・保育士・コールセンター向け ボイスケア<small>声枯れ・喉の疲れを減らす、使い続けられる声の出し方</small></li>
+          <li>イベント・式典での演奏／出張演奏<small>保育園・幼稚園・地域イベント・社内行事など</small></li>
+        </ul>
+        <p style="font-size:13px;color:var(--mid);line-height:1.9;">対面（川崎・都内近郊）／オンライン どちらも対応。内容・人数・時間に合わせてお見積りします。<br>講師：酒井翔子（Voice Professionals認定コーチ／東宝ミュージカルアカデミー卒）</p>
+      </div>
+      <div class="biz-form" id="bizForm">
+        <div class="form-field"><label>会社名・団体名<span class="req">*</span></label><input type="text" id="bzOrg" placeholder="株式会社〇〇"></div>
+        <div class="form-field"><label>ご担当者名<span class="req">*</span></label><input type="text" id="bzName" placeholder="山田 太郎"></div>
+        <div class="form-field"><label>メールアドレス<span class="req">*</span></label><input type="email" id="bzEmail" placeholder="example@company.co.jp"></div>
+        <div class="form-field"><label>ご相談内容</label><textarea id="bzNote" placeholder="例：営業チーム10名に話し方研修を検討しています。時期は来年1月頃、対面希望です。"></textarea></div>
+        <button class="biz-submit" onclick="submitBiz()">お問い合わせを送る</button>
+        <p style="font-size:11px;color:var(--light);margin-top:10px;text-align:center;">2営業日以内にメールでご返信します</p>
+      </div>
+      <div class="biz-form" id="bizDone" style="display:none;text-align:center;">
+        <div style="font-size:36px;margin-bottom:8px;">✉️</div>
+        <h3 style="font-size:16px;color:var(--dark);margin-bottom:8px;">お問い合わせを受け付けました</h3>
+        <p style="font-size:13px;color:var(--mid);line-height:1.8;">2営業日以内にメールでご返信します。</p>
+      </div>
+    </div>
+
+    <div style="margin-top:40px;" class="lessons-grid two">
+      <div class="lesson-card green">
+        <div class="lesson-icon">🎹</div>
+        <h3>演奏活動・出張演奏</h3>
+        <p>保育園・幼稚園や地域イベント、社内行事での演奏も承っています。夢を叶えるためのロードマップのお話や、演奏を合わせてのトークなども可能です。</p>
+        <div class="lesson-price" style="font-size:16px; color:var(--mid);">料金はお問い合わせください</div>
+      </div>
+      <div class="lesson-card yellow">
+        <div class="lesson-icon">🎓</div>
+        <h3>学校・教育機関向け</h3>
+        <p>合唱部・演劇部への発声指導、教員向けの声の使い方講座など。子役指導の経験を活かし、子どもにも伝わる言葉で。</p>
+        <div class="lesson-price" style="font-size:16px; color:var(--mid);">料金はお問い合わせください</div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="faq">
+  <div class="section-inner">
+    <div class="section-label">FAQ</div>
+    <h2 class="section-title">よくある<em>質問</em></h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Q. 対面とオンライン、どちらも可能ですか？<span class="faq-arrow">▼</span></button>
+        <div class="faq-a">どちらも対応しています。対面は川崎・都内近郊、オンラインはZoomで全国対応。ハイブリッドも可能です。</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Q. 料金の目安は？<span class="faq-arrow">▼</span></button>
+        <div class="faq-a">内容・人数・時間によってお見積りします。まずはお問い合わせフォームから、ご希望の内容と規模をお知らせください。</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Q. 講師はどんな人ですか？<span class="faq-arrow">▼</span></button>
+        <div class="faq-a">酒井翔子。帝国劇場をはじめ商業ミュージカルに出演後、音声学ベースの指導者に。Voice Professionals認定コーチ、東宝ミュージカル『SPY×FAMILY』子役歌唱指導。詳しくは<a href='index.html#about'>講師について</a>。</div>
+      </div>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="footer-logo">VoiceGrace</div>
+  <div class="footer-tagline">帝劇の舞台から、「声の仕組み」を教える人へ。</div>
+  <div class="footer-sns">
+    <a href="https://www.threads.com/@shoko.sakai.1102" target="_blank" class="sns-btn" title="Threads">🧵</a>
+    <a href="https://www.instagram.com/shoko.sakai.1102" target="_blank" class="sns-btn" title="Instagram（日常）">📸</a>
+    <a href="https://www.instagram.com/shoko.sing1102" target="_blank" class="sns-btn" title="Instagram（歌唱動画）">🎶</a>
+    <a href="https://note.com/shkski1102" target="_blank" class="sns-btn" title="note">📝</a>
+    <a href="https://line.me/R/ti/p/@036bejox" target="_blank" class="sns-btn" title="公式LINE" style="background:#06C755;">💬</a>
+  </div>
+  <div class="footer-links">
+    <a href="index.html">ホーム</a>
+    <a href="kids.html">子ども・保護者の方</a>
+    <a href="adults.html">大人の方</a>
+    <a href="business.html">企業・団体の方</a>
+    <a href="index.html#about">講師について</a>
+  </div>
+  <p class="footer-copy">© 2026 VoiceGrace / 酒井翔子. All rights reserved.</p>
+</footer>
+<a href="https://line.me/R/ti/p/@036bejox" target="_blank" class="line-float">💬 LINEで相談</a>
+<script src="site.js"></script>
+</body>
+</html>
