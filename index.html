@@ -306,7 +306,15 @@ footer { background:var(--dark); color:rgba(255,252,249,.7); padding:56px 32px 3
 .reveal { opacity:0; transform:translateY(28px); transition:opacity .7s ease,transform .7s ease; }
 .reveal.visible { opacity:1; transform:translateY(0); }
 @keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
-@media(max-width:480px){ section{padding:68px 20px;} nav{padding:0 20px;} }
+.btn-line { padding:16px 36px; background:#06C755; color:#fff; border-radius:40px; font-size:14px; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:8px; transition:all .3s; letter-spacing:.08em; box-shadow:0 8px 28px rgba(6,199,85,.35); }
+.btn-line:hover { transform:translateY(-2px); box-shadow:0 12px 32px rgba(6,199,85,.45); }
+.btn-line small { display:block; font-size:11px; font-weight:400; letter-spacing:0; opacity:.9; }
+.line-box { background:#fff; border:2px solid #06C755; border-radius:16px; padding:20px; margin-bottom:28px; text-align:center; }
+.line-box h4 { font-size:15px; color:var(--dark); margin-bottom:6px; }
+.line-box p { font-size:12px; color:var(--mid); line-height:1.8; margin-bottom:14px; }
+.line-float { position:fixed; right:16px; bottom:16px; z-index:98; background:#06C755; color:#fff; border-radius:40px; padding:12px 18px; font-size:13px; font-weight:700; text-decoration:none; box-shadow:0 6px 20px rgba(0,0,0,.2); display:flex; align-items:center; gap:6px; }
+.lt-grid.compact { grid-template-columns:repeat(2,1fr); }
+@media(max-width:480px){ section{padding:68px 20px;} nav{padding:0 20px;} .hero-buttons a{width:100%;text-align:center;justify-content:center;} }
 </style>
 </head>
 <body>
@@ -336,8 +344,8 @@ footer { background:var(--dark); color:rgba(255,252,249,.7); padding:56px 32px 3
         3歳から80歳以上の生徒さんにも指導経験あり。趣味の方からプロの方まで幅広く指導しています。
       </p>
       <div class="hero-buttons">
-        <a href="#booking" class="btn-main">レッスンを予約する 🌸</a>
-        <a href="#lessons" class="btn-outline">レッスンを見る</a>
+        <a href="https://line.me/R/ti/p/@036bejox" target="_blank" class="btn-line">💬 LINEで無料相談・登録<small>おうち練習チェックリストPDF付き</small></a>
+        <a href="#booking" class="btn-outline">レッスンを予約する 🌸</a>
       </div>
     </div>
     <div class="hero-visual">
@@ -589,53 +597,37 @@ footer { background:var(--dark); color:rgba(255,252,249,.7); padding:56px 32px 3
     <div class="section-label">Booking</div>
     <h2 class="section-title">レッスンを<em>予約する</em></h2>
     <p class="section-sub">まずはお気軽にご予約ください🌸</p>
-    <div style="background:var(--yellow);border-radius:16px;padding:16px 20px;margin-bottom:28px;text-align:center;font-size:13px;color:var(--mid);line-height:1.8;">
-      <strong>📝 noteをご購入の方へ特典あり</strong><br>
-      noteをご購入いただいた方は初回レッスン特別価格でご受講いただけます。<br>
-      <a href="https://note.com/shkski1102" target="_blank" style="color:var(--coral-dark);font-weight:700;text-decoration:underline;">翔子のnoteはこちら →</a>
+    <div class="line-box">
+      <h4>💬 まずはLINEで気軽に相談もOK</h4>
+      <p>「どのレッスンが合う？」「子どもでも大丈夫？」などお気軽にどうぞ。<br>登録特典：おうち練習チェックリストPDF（歌・セリフ・動画撮影）</p>
+      <a href="https://line.me/R/ti/p/@036bejox" target="_blank" class="btn-line">LINEで友だち追加</a>
     </div>
+    <p style="font-size:12px;color:var(--mid);text-align:center;margin-bottom:24px;">※noteをご購入の方は初回レッスン特別価格あり（<a href="https://note.com/shkski1102" target="_blank" style="color:var(--coral-dark);text-decoration:underline;">翔子のnote</a>）</p>
     <div id="bForm">
       <div class="form-field">
         <label>レッスン種別<span class="req">*</span></label>
-        <div class="lt-grid">
-          <div class="lt-option"><input type="radio" name="lt" id="lt1" value="ボイストレーニング（25分）" checked><label for="lt1">ボイストレーニング<span class="lt-sub">25分</span><span class="lt-price">¥5,500</span></label></div>
-          <div class="lt-option"><input type="radio" name="lt" id="lt2" value="ボイストレーニング（50分）"><label for="lt2">ボイストレーニング<span class="lt-sub">50分</span><span class="lt-price">¥11,000</span></label></div>
-          <div class="lt-option"><input type="radio" name="lt" id="lt3" value="子役・ジュニアレッスン（25分）"><label for="lt3">子役・ジュニア<span class="lt-sub">25分 / 3歳〜中学生</span><span class="lt-price">¥4,500</span></label></div>
-          <div class="lt-option"><input type="radio" name="lt" id="lt4" value="子役・ジュニアレッスン（50分）"><label for="lt4">子役・ジュニア<span class="lt-sub">50分 / 3歳〜中学生</span><span class="lt-price">¥9,000</span></label></div>
-          <div class="lt-option"><input type="radio" name="lt" id="lt5" value="オーディション対策"><label for="lt5">オーディション対策<span class="lt-sub">合格実績あり</span><span class="lt-price">¥11,000/50分</span></label></div>
-          <div class="lt-option"><input type="radio" name="lt" id="lt6" value="LINEサポート"><label for="lt6">LINEサポート<span class="lt-sub">動画添削・質問し放題</span><span class="lt-price">¥10,000〜/月</span></label></div>
-          <div class="lt-option"><input type="radio" name="lt" id="lt7" value="企業向け話し方講座"><label for="lt7">企業向け話し方講座<span class="lt-sub">研修・プレゼン指導</span><span class="lt-price">要お問い合わせ</span></label></div>
-          <div class="lt-option"><input type="radio" name="lt" id="lt8" value="演奏活動・出張演奏"><label for="lt8">演奏活動・出張演奏<span class="lt-sub">保育園・地域イベント等</span><span class="lt-price">要お問い合わせ</span></label></div>
+        <div class="lt-grid compact">
+          <div class="lt-option"><input type="radio" name="lt" id="lt1" value="ボイストレーニング" checked onchange="onLtChange()"><label for="lt1">ボイストレーニング<span class="lt-sub">歌・話し声・大人の方</span><span class="lt-price">¥5,500/25分・¥11,000/50分</span></label></div>
+          <div class="lt-option"><input type="radio" name="lt" id="lt2" value="子役・ジュニアレッスン" onchange="onLtChange()"><label for="lt2">子役・ジュニア<span class="lt-sub">3歳〜中学生</span><span class="lt-price">¥4,500/25分・¥9,000/50分</span></label></div>
+          <div class="lt-option"><input type="radio" name="lt" id="lt3" value="オーディション対策" onchange="onLtChange()"><label for="lt3">オーディション対策<span class="lt-sub">大人・子ども どちらも</span><span class="lt-price">¥5,500/25分・¥11,000/50分</span></label></div>
+          <div class="lt-option"><input type="radio" name="lt" id="lt4" value="その他のご相談" onchange="onLtChange()"><label for="lt4">その他のご相談<span class="lt-sub">LINEサポート・企業研修・出張演奏</span><span class="lt-price">要お問い合わせ</span></label></div>
         </div>
+      </div>
+      <div class="form-field" id="durField">
+        <label>レッスン時間<span class="req">*</span></label>
+        <select id="bDur">
+          <option value="25分">25分</option>
+          <option value="50分">50分</option>
+        </select>
       </div>
       <div class="date-row">
         <div class="form-field">
-          <label>希望日<span class="req">*</span></label>
-          <select id="bDate" onchange="updateTimeSlots()">
-            <option value="">選択してください</option>
-            <option value="4月6日（日）">4月6日（日）</option>
-            <option value="4月7日（月）">4月7日（月）</option>
-            <option value="4月8日（火）">4月8日（火）</option>
-            <option value="4月9日（水）">4月9日（水）</option>
-            <option value="4月10日（木）">4月10日（木）</option>
-            <option value="4月13日（日）">4月13日（日）</option>
-            <option value="4月14日（月）">4月14日（月）</option>
-            <option value="4月15日（火）">4月15日（火）</option>
-            <option value="4月16日（水）">4月16日（水）</option>
-            <option value="4月17日（木）">4月17日（木）</option>
-            <option value="4月20日（日）">4月20日（日）</option>
-            <option value="4月21日（月）">4月21日（月）</option>
-            <option value="4月22日（火）">4月22日（火）</option>
-            <option value="4月23日（水）">4月23日（水）</option>
-            <option value="4月27日（日）">4月27日（日）</option>
-            <option value="4月28日（月）">4月28日（月）</option>
-          </select>
+          <label>希望日<span class="req">*</span> <span style="font-size:11px;color:var(--light);font-weight:400;">空き状況を確認してご返信します</span></label>
+          <input type="date" id="bDate">
         </div>
         <div class="form-field">
           <label>希望時間<span class="req">*</span></label>
-          <select id="bTime">
-            <option value="">まず日付を選んでください</option>
-          </select>
+          <select id="bTime"></select>
         </div>
       </div>
 
@@ -656,62 +648,22 @@ footer { background:var(--dark); color:rgba(255,252,249,.7); padding:56px 32px 3
       <div class="date-row">
         <div class="form-field">
           <label>第2希望日</label>
-          <select id="bDate2" onchange="updateTimeSlots2()">
-            <option value="">選択してください</option>
-            <option value="4月6日（日）">4月6日（日）</option>
-            <option value="4月7日（月）">4月7日（月）</option>
-            <option value="4月8日（火）">4月8日（火）</option>
-            <option value="4月9日（水）">4月9日（水）</option>
-            <option value="4月10日（木）">4月10日（木）</option>
-            <option value="4月13日（日）">4月13日（日）</option>
-            <option value="4月14日（月）">4月14日（月）</option>
-            <option value="4月15日（火）">4月15日（火）</option>
-            <option value="4月16日（水）">4月16日（水）</option>
-            <option value="4月17日（木）">4月17日（木）</option>
-            <option value="4月20日（日）">4月20日（日）</option>
-            <option value="4月21日（月）">4月21日（月）</option>
-            <option value="4月22日（火）">4月22日（火）</option>
-            <option value="4月23日（水）">4月23日（水）</option>
-            <option value="4月27日（日）">4月27日（日）</option>
-            <option value="4月28日（月）">4月28日（月）</option>
-          </select>
+          <input type="date" id="bDate2">
         </div>
         <div class="form-field">
           <label>第2希望時間</label>
-          <select id="bTime2">
-            <option value="">まず日付を選んでください</option>
-          </select>
+          <select id="bTime2"></select>
         </div>
       </div>
 
       <div class="date-row">
         <div class="form-field">
           <label>第3希望日</label>
-          <select id="bDate3" onchange="updateTimeSlots3()">
-            <option value="">選択してください</option>
-            <option value="4月6日（日）">4月6日（日）</option>
-            <option value="4月7日（月）">4月7日（月）</option>
-            <option value="4月8日（火）">4月8日（火）</option>
-            <option value="4月9日（水）">4月9日（水）</option>
-            <option value="4月10日（木）">4月10日（木）</option>
-            <option value="4月13日（日）">4月13日（日）</option>
-            <option value="4月14日（月）">4月14日（月）</option>
-            <option value="4月15日（火）">4月15日（火）</option>
-            <option value="4月16日（水）">4月16日（水）</option>
-            <option value="4月17日（木）">4月17日（木）</option>
-            <option value="4月20日（日）">4月20日（日）</option>
-            <option value="4月21日（月）">4月21日（月）</option>
-            <option value="4月22日（火）">4月22日（火）</option>
-            <option value="4月23日（水）">4月23日（水）</option>
-            <option value="4月27日（日）">4月27日（日）</option>
-            <option value="4月28日（月）">4月28日（月）</option>
-          </select>
+          <input type="date" id="bDate3">
         </div>
         <div class="form-field">
           <label>第3希望時間</label>
-          <select id="bTime3">
-            <option value="">まず日付を選んでください</option>
-          </select>
+          <select id="bTime3"></select>
         </div>
       </div>
       <div class="form-field"><label>お名前<span class="req">*</span></label><input type="text" id="bName" placeholder="山田 花子"></div>
@@ -722,7 +674,7 @@ footer { background:var(--dark); color:rgba(255,252,249,.7); padding:56px 32px 3
     <div class="booking-success" id="bSuccess">
       <div class="success-emoji">🎉</div>
       <h3>予約リクエスト<em>完了！</em></h3>
-      <p>ご予約ありがとうございます。<br>確認メールをご確認ください。</p>
+      <p>ご予約リクエストありがとうございます。<br>空き状況を確認のうえ、2日以内にメールでご連絡します。</p>
       <div class="confirm-box" id="bConfirmBox"></div>
       <button class="btn-reset" onclick="resetBooking()">別の日程で予約する</button>
     </div>
@@ -737,6 +689,7 @@ footer { background:var(--dark); color:rgba(255,252,249,.7); padding:56px 32px 3
     <a href="https://www.instagram.com/shoko.sakai.1102" target="_blank" class="sns-btn" title="Instagram（日常）">📸</a>
     <a href="https://www.instagram.com/shoko.sing1102" target="_blank" class="sns-btn" title="Instagram（歌唱動画）">🎶</a>
     <a href="https://note.com/shkski1102" target="_blank" class="sns-btn" title="note">📝</a>
+    <a href="https://line.me/R/ti/p/@036bejox" target="_blank" class="sns-btn" title="公式LINE" style="background:#06C755;">💬</a>
   </div>
   <div class="footer-links">
     <a href="#about">講師について</a>
@@ -745,76 +698,27 @@ footer { background:var(--dark); color:rgba(255,252,249,.7); padding:56px 32px 3
     <a href="#faq">FAQ</a>
     <a href="#booking">予約</a>
   </div>
-  <p class="footer-copy">© 2025 VoiceGrace / 酒井翔子. All rights reserved.</p>
+  <p class="footer-copy">© 2026 VoiceGrace / 酒井翔子. All rights reserved.</p>
 </footer>
+<a href="https://line.me/R/ti/p/@036bejox" target="_blank" class="line-float">💬 LINEで相談</a>
 
 <script>
-const slots = {
-  "4月6日（日）": ["11:00", "12:00"],
-  "4月7日（月）": ["10:00", "11:00", "12:00", "14:00"],
-  "4月8日（火）": ["10:30"],
-  "4月9日（水）": ["09:30", "10:30", "11:30", "12:30", "13:30", "14:30"],
-  "4月10日（木）": ["09:30", "10:30", "11:30", "15:00"],
-  "4月13日（日）": ["09:30", "10:30", "11:30", "12:30", "13:30"],
-  "4月14日（月）": ["09:30", "10:30", "15:00", "16:00"],
-  "4月15日（火）": ["11:30", "12:30", "13:30"],
-  "4月16日（水）": ["10:30", "11:30", "12:30", "13:30", "14:30"],
-  "4月17日（木）": ["09:30", "10:30", "11:30", "12:30", "13:30", "14:30"],
-  "4月20日（日）": ["09:30", "10:30", "11:30", "12:30", "13:30", "14:30", "15:30"],
-  "4月21日（月）": ["12:00", "13:00", "14:00"],
-  "4月22日（火）": ["10:30", "11:30", "12:30", "13:30"],
-  "4月23日（水）": ["09:30", "10:30", "11:30", "12:30", "13:30", "14:30"],
-  "4月27日（日）": ["09:30", "10:30", "12:30", "13:30"],
-  "4月28日（月）": ["09:30", "10:30", "11:30", "12:30", "13:30", "14:30"],
-};
-
-function updateTimeSlots() {
-  const date = document.getElementById("bDate").value;
-  const timeSelect = document.getElementById("bTime");
-  timeSelect.innerHTML = "";
-  if (!date || !slots[date]) {
-    timeSelect.innerHTML = '<option value="">まず日付を選んでください</option>';
-    return;
-  }
-  timeSelect.innerHTML = '<option value="">時間を選んでください</option>';
-  slots[date].forEach(t => {
-    const opt = document.createElement("option");
-    opt.value = t; opt.textContent = t;
-    timeSelect.appendChild(opt);
+// 希望時間の候補（平日・休日共通、18:00まで）
+const TIMES=["09:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00"];
+(function initBooking(){
+  const d=new Date(); d.setDate(d.getDate()+2);
+  const min=d.toISOString().slice(0,10);
+  ["bDate","bDate2","bDate3"].forEach(id=>{ document.getElementById(id).min=min; });
+  ["bTime","bTime2","bTime3"].forEach(id=>{
+    const sel=document.getElementById(id);
+    sel.innerHTML='<option value="">時間を選んでください</option>'+TIMES.map(t=>`<option value="${t}">${t}</option>`).join("");
   });
+})();
+function onLtChange(){
+  const lt=document.querySelector("input[name=lt]:checked")?.value||"";
+  document.getElementById("durField").style.display = (lt==="その他のご相談") ? "none" : "block";
 }
-
-function updateTimeSlots2() {
-  const date = document.getElementById("bDate2").value;
-  const timeSelect = document.getElementById("bTime2");
-  timeSelect.innerHTML = "";
-  if (!date || !slots[date]) {
-    timeSelect.innerHTML = '<option value="">まず日付を選んでください</option>';
-    return;
-  }
-  timeSelect.innerHTML = '<option value="">時間を選んでください</option>';
-  slots[date].forEach(t => {
-    const opt = document.createElement("option");
-    opt.value = t; opt.textContent = t;
-    timeSelect.appendChild(opt);
-  });
-}
-
-function updateTimeSlots3() {
-  const date = document.getElementById("bDate3").value;
-  const timeSelect = document.getElementById("bTime3");
-  timeSelect.innerHTML = "";
-  if (!date || !slots[date]) {
-    timeSelect.innerHTML = '<option value="">まず日付を選んでください</option>';
-    return;
-  }
-  timeSelect.innerHTML = '<option value="">時間を選んでください</option>';
-  slots[date].forEach(t => {
-    const opt = document.createElement("option");
-    opt.value = t; opt.textContent = t;
-    timeSelect.appendChild(opt);
-  });
-}
+function fmtDate(v){ if(!v) return ""; return new Date(v+"T00:00:00").toLocaleDateString("ja-JP",{month:"long",day:"numeric",weekday:"short"}); }
 
 function toggleMenu(){
   const l = document.querySelector(".nav-links");
@@ -834,7 +738,8 @@ async function submitForm(){
   const email=document.getElementById("bEmail").value.trim();
   const date=document.getElementById("bDate").value;
   const time=document.getElementById("bTime").value;
-  const lt=document.querySelector("input[name=lt]:checked")?.value||"";
+  const ltBase=document.querySelector("input[name=lt]:checked")?.value||"";
+  const lt = ltBase==="その他のご相談" ? ltBase : ltBase+"（"+document.getElementById("bDur").value+"）";
   const note=document.getElementById("bNote").value;
   const fmt2check = document.getElementById("bFormat").value; if(!name||!email||!date||!time||!fmt2check){ alert("お名前、メールアドレス、希望日、希望時間、レッスン形式は必須です。"); return; }
 
@@ -849,15 +754,15 @@ async function submitForm(){
       body: JSON.stringify({
         name, email, lessonType: lt,
         format: document.getElementById("bFormat").value,
-        "第1希望": date + " " + time,
-        "第2希望": document.getElementById("bDate2").value + " " + document.getElementById("bTime2").value,
-        "第3希望": document.getElementById("bDate3").value + " " + document.getElementById("bTime3").value,
+        "第1希望": fmtDate(date) + " " + time,
+        "第2希望": fmtDate(document.getElementById("bDate2").value) + " " + document.getElementById("bTime2").value,
+        "第3希望": fmtDate(document.getElementById("bDate3").value) + " " + document.getElementById("bTime3").value,
         message: note
       })
     });
 
     if (res.ok) {
-      const fmt=new Date(date+"T00:00:00").toLocaleDateString("ja-JP",{year:"numeric",month:"long",day:"numeric",weekday:"short"});
+      const fmt=fmtDate(date);
       document.getElementById("bConfirmBox").innerHTML=`
         <div class="confirm-row"><span class="ck">お名前</span><span class="cv">${name}</span></div>
         <div class="confirm-row"><span class="ck">レッスン</span><span class="cv">${lt}</span></div>
@@ -868,20 +773,19 @@ async function submitForm(){
       document.getElementById("bSuccess").style.display="block";
       window.scrollTo({top:document.getElementById("booking").offsetTop-80,behavior:"smooth"});
     } else {
-      alert("送信に失敗しました。お手数ですがLINEよりお問い合わせください。");
+      alert("送信に失敗しました。お手数ですがLINEよりお問い合わせください。"); window.open("https://line.me/R/ti/p/@036bejox","_blank");
       btn.textContent = "予約リクエストを送る 🌸";
       btn.disabled = false;
     }
   } catch(e) {
-    alert("送信に失敗しました。お手数ですがLINEよりお問い合わせください。");
+    alert("送信に失敗しました。お手数ですがLINEよりお問い合わせください。"); window.open("https://line.me/R/ti/p/@036bejox","_blank");
     btn.textContent = "予約リクエストを送る 🌸";
     btn.disabled = false;
   }
 }
 
 function resetBooking(){
-  ["bName","bEmail","bDate","bNote"].forEach(id=>document.getElementById(id).value="");
-  document.getElementById("bTime").value="";
+  ["bName","bEmail","bDate","bDate2","bDate3","bNote","bTime","bTime2","bTime3"].forEach(id=>document.getElementById(id).value="");
   document.getElementById("bForm").style.display="block";
   document.getElementById("bSuccess").style.display="none";
 }
