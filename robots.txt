@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /voicegrace/lab/
+Disallow: /lab/
